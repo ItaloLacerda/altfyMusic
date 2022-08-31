@@ -5,9 +5,16 @@ import Loading from './Loading';
 
 export default class MusicCard extends Component {
   state = {
+
     loading: false,
     checked: false,
   };
+
+  componentDidMount() {
+    const { favoriteSongs, trackId } = this.props;
+    const FAVORITESONGS = favoriteSongs.some((track) => track.trackId === trackId);
+    this.setState({ checked: FAVORITESONGS });
+  }
 
   handelClick = async (obj) => {
     this.setState({ loading: true });
@@ -44,4 +51,5 @@ MusicCard.propTypes = {
   previewUrl: PropTypes.string.isRequired,
   trackId: PropTypes.number.isRequired,
   track: PropTypes.objectOf().isRequired,
+  favoriteSongs: PropTypes.arrayOf.isRequired,
 };
