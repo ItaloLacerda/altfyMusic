@@ -71,7 +71,7 @@ export default class Search extends Component {
                   ? <p>Nenhum álbum foi encontrado</p> : AlbumsAPI.map((element) => (
                     <Link
                       to={ `/album/${element.collectionId}` }
-                      key={ element.collectionId }
+                      key={ element.trackId }
                       data-testid={ `link-to-album-${element.collectionId}` }
                     >
                       <Card

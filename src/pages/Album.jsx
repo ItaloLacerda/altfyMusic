@@ -20,7 +20,6 @@ export default class Album extends Component {
 
   render() {
     const { musicAlbum, artistName } = this.state;
-    console.log(musicAlbum);
     return (
       <div data-testid="page-album">
         <Header />
@@ -28,7 +27,9 @@ export default class Album extends Component {
         <h3 data-testid="artist-name">{artistName.artistName}</h3>
         {musicAlbum.map((track) => (
           <MusicCard
-            key={ track.trackName }
+            track={ track }
+            trackId={ track.trackId }
+            key={ track.trackId }
             trackName={ track.trackName }
             previewUrl={ track.previewUrl }
           />))}
