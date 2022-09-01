@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, removeSong } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 export default class MusicCard extends Component {
@@ -17,9 +17,16 @@ export default class MusicCard extends Component {
   }
 
   handelClick = async (obj) => {
-    this.setState({ loading: true });
-    await addSong(obj);
-    this.setState({ loading: false, checked: true });
+    const { checked } = this.state;
+    if (checked) {
+      this.setState({ loading: true });
+      await removeSong(obj);
+      this.setState({ loading: false, checked: false });
+    } else {
+      this.setState({ loading: true });
+      await addSong(obj);
+      this.setState({ loading: false, checked: true });
+    }
   };
 
   render() {
