@@ -58,5 +58,6 @@ MusicCard.propTypes = {
   previewUrl: PropTypes.string.isRequired,
   trackId: PropTypes.number.isRequired,
   track: PropTypes.objectOf().isRequired,
+  parentCallback: PropTypes.shape.isRequired,
   favoriteSongs: PropTypes.arrayOf.isRequired,
 };
