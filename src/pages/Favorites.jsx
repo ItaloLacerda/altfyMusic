@@ -8,6 +8,7 @@ export default class Favorites extends Component {
   state = {
     loading: false,
     favoriteSongs: [],
+
   };
 
   async componentDidMount() {
@@ -16,20 +17,31 @@ export default class Favorites extends Component {
     this.setState({ loading: false, favoriteSongs });
   }
 
+  handleCallback = async () => {
+    const { favoriteSongs } = this.state;
+    this.setState({ loading: true });
+    const newFavoriteSongs = await getFavoriteSongs();
+    if (newFavoriteSongs !== favoriteSongs) {
+      this.setState({ loading: false, favoriteSongs: newFavoriteSongs });
+    }
+  };
+
   render() {
     const { loading, favoriteSongs } = this.state;
     return (
       loading ? <Loading /> : (
         <div data-testid="page-favorites">
           <Header />
-          {favoriteSongs.map((music) => (<MusicCard
-            favoriteSongs={ favoriteSongs }
-            track={ music }
-            trackId={ music.trackId }
-            key={ music.trackId }
-            trackName={ music.trackName }
-            previewUrl={ music.previewUrl }
-          />))}
+          {favoriteSongs.map((music) => (
+            <MusicCard
+              parentCallback={ this.handleCallback }
+              favoriteSongs={ favoriteSongs }
+              track={ music }
+              trackId={ music.trackId }
+              key={ music.trackId }
+              trackName={ music.trackName }
+              previewUrl={ music.previewUrl }
+            />))}
         </div>)
     );
   }

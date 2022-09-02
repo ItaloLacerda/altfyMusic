@@ -5,7 +5,6 @@ import Loading from './Loading';
 
 export default class MusicCard extends Component {
   state = {
-
     loading: false,
     checked: false,
   };
@@ -16,22 +15,23 @@ export default class MusicCard extends Component {
     this.setState({ checked: FAVORITESONGS });
   }
 
-  handelClick = async (obj) => {
+  handelChange = async (obj, func) => {
     const { checked } = this.state;
+    this.setState({ loading: true });
     if (checked) {
-      this.setState({ loading: true });
       await removeSong(obj);
-      this.setState({ loading: false, checked: false });
+      this.setState({ checked: false });
     } else {
-      this.setState({ loading: true });
       await addSong(obj);
-      this.setState({ loading: false, checked: true });
+      this.setState({ checked: true });
     }
+    this.setState({ loading: false });
+    func();
   };
 
   render() {
     const { loading, checked } = this.state;
-    const { trackName, previewUrl, trackId, track } = this.props;
+    const { trackName, previewUrl, trackId, track, parentCallback } = this.props;
     return (
       loading ? <Loading /> : (
         <div>
@@ -44,7 +44,7 @@ export default class MusicCard extends Component {
             <input
               type="checkbox"
               id={ trackId }
-              onClick={ () => this.handelClick(track) }
+              onChange={ () => this.handelChange(track, parentCallback) }
               checked={ checked }
             />
           </label>
