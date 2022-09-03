@@ -15,23 +15,23 @@ export default class MusicCard extends Component {
     this.setState({ checked: FAVORITESONGS });
   }
 
-  handelChange = async (obj) => {
+  handelChange = async (obj, func) => {
     const { checked } = this.state;
     this.setState({ loading: true });
     if (checked) {
       await removeSong(obj);
       this.setState({ checked: false });
+      func();
     } else {
       await addSong(obj);
       this.setState({ checked: true });
     }
     this.setState({ loading: false });
-    // func();
   };
 
   render() {
     const { loading, checked } = this.state;
-    const { trackName, previewUrl, trackId, track } = this.props;
+    const { trackName, previewUrl, trackId, track, parentCallback } = this.props;
     return (
       loading ? <Loading /> : (
         <div>
@@ -44,7 +44,7 @@ export default class MusicCard extends Component {
             <input
               type="checkbox"
               id={ trackId }
-              onChange={ () => this.handelChange(track) }
+              onChange={ () => this.handelChange(track, parentCallback) }
               checked={ checked }
             />
           </label>
@@ -58,6 +58,6 @@ MusicCard.propTypes = {
   previewUrl: PropTypes.string.isRequired,
   trackId: PropTypes.number.isRequired,
   track: PropTypes.shape.isRequired,
-  // parentCallback: PropTypes.shape.isRequired,
+  parentCallback: PropTypes.shape.isRequired,
   favoriteSongs: PropTypes.arrayOf.isRequired,
 };
