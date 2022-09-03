@@ -11,6 +11,7 @@ export default class MusicCard extends Component {
 
   componentDidMount() {
     const { favoriteSongs, trackId } = this.props;
+    console.log(favoriteSongs);
     const FAVORITESONGS = favoriteSongs.some((track) => track.trackId === trackId);
     this.setState({ checked: FAVORITESONGS });
   }
@@ -57,7 +58,7 @@ MusicCard.propTypes = {
   trackName: PropTypes.string.isRequired,
   previewUrl: PropTypes.string.isRequired,
   trackId: PropTypes.number.isRequired,
-  track: PropTypes.objectOf().isRequired,
+  track: PropTypes.shape.isRequired,
   parentCallback: PropTypes.shape.isRequired,
   favoriteSongs: PropTypes.arrayOf.isRequired,
 };
