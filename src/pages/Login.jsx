@@ -41,6 +41,7 @@ export default class Login extends Component {
             {redirect && <Redirect to="/search" /> }
             <form>
               <label htmlFor="image">
+                <p>Perfil</p>
                 <input
                   name="image"
                   id="image"
@@ -50,6 +51,7 @@ export default class Login extends Component {
                 />
               </label>
               <label htmlFor="login">
+                <p>Nome</p>
                 <input
                   data-testid="login-name-input"
                   name="name"
@@ -60,6 +62,7 @@ export default class Login extends Component {
                 />
               </label>
               <label htmlFor="email">
+                <p>Email</p>
                 <input
                   name="email"
                   id="email"
@@ -69,6 +72,7 @@ export default class Login extends Component {
                 />
               </label>
               <label htmlFor="description">
+                <p>Descrição</p>
                 <input
                   name="description"
                   id="description"
