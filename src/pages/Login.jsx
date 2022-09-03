@@ -51,6 +51,7 @@ export default class Login extends Component {
               </label>
               <label htmlFor="login">
                 <input
+                  data-testid="login-name-input"
                   name="name"
                   id="login"
                   type="text"
