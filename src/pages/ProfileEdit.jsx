@@ -23,10 +23,10 @@ export default class ProfileEdit extends Component {
       email: userInformation.email,
       description: userInformation.description,
       loading: false,
-    });
+    }, () => this.enableButton());
   }
 
-  handelChange = ({ target }) => {
+  enableButton = () => {
     const { inputName, image, email, description } = this.state;
 
     const valueName = inputName !== '';
@@ -40,7 +40,10 @@ export default class ProfileEdit extends Component {
     } else {
       this.setState({ disabled: true });
     }
+  };
 
+  handelChange = ({ target }) => {
+    this.enableButton();
     const { name } = target;
     this.setState({
       [name]: target.value,
@@ -116,7 +119,7 @@ export default class ProfileEdit extends Component {
                 data-testid="edit-button-save"
                 onClick={ this.handelClick }
               >
-                Salvar
+                Editar perfil
               </button>
             </form>
           )}
