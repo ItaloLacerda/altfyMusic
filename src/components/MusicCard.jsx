@@ -16,16 +16,17 @@ export default class MusicCard extends Component {
   }
 
   handelChange = async (obj, func) => {
+    const { parentCallback } = this.props;
     const { checked } = this.state;
     this.setState({ loading: true });
     if (checked) {
       await removeSong(obj);
       this.setState({ checked: false });
-      func();
     } else {
       await addSong(obj);
       this.setState({ checked: true });
     }
+    if (parentCallback) func();
     this.setState({ loading: false });
   };
 
