@@ -6,13 +6,16 @@ import Loading from '../components/Loading';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 
 export default class Search extends Component {
-  state = {
-    searchEntry: '',
-    artistOrMusic: '',
-    loadingSearch: false,
-    APIreturn: false,
-    AlbumsAPI: [],
-  };
+  constructor() {
+    super();
+    this.state = {
+      searchEntry: '',
+      artistOrMusic: '',
+      loadingSearch: false,
+      APIreturn: false,
+      AlbumsAPI: [],
+    };
+  }
 
   handelChange = ({ target }) => {
     const { value } = target;
@@ -33,8 +36,10 @@ export default class Search extends Component {
   };
 
   render() {
-    const { searchEntry, APIreturn, loadingSearch,
-      AlbumsAPI, artistOrMusic } = this.state;
+    const {
+      searchEntry, APIreturn, loadingSearch,
+      AlbumsAPI, artistOrMusic,
+    } = this.state;
     const minimumCharacters = 2;
     return (
       loadingSearch ? <Loading />
@@ -47,15 +52,15 @@ export default class Search extends Component {
                   data-testid="search-artist-input"
                   id="searchEntry"
                   type="text"
-                  onChange={ this.handelChange }
-                  value={ searchEntry }
+                  onChange={this.handelChange}
+                  value={searchEntry}
                 />
               </label>
               <button
                 type="button"
-                disabled={ searchEntry.length < minimumCharacters }
+                disabled={searchEntry.length < minimumCharacters}
                 data-testid="search-artist-button"
-                onClick={ this.handelClick }
+                onClick={this.handelClick}
               >
                 Pesquisar
               </button>
@@ -70,18 +75,19 @@ export default class Search extends Component {
                 { AlbumsAPI.length === 0
                   ? <p>Nenhum álbum foi encontrado</p> : AlbumsAPI.map((element) => (
                     <Link
-                      to={ `/album/${element.collectionId}` }
-                      key={ element.trackId }
-                      data-testid={ `link-to-album-${element.collectionId}` }
+                      to={`/album/${element.collectionId}`}
+                      key={element.trackId}
+                      data-testid={`link-to-album-${element.collectionId}`}
                     >
                       <Card
-                        imageAlbum={ element.artworkUrl100 }
-                        collectionName={ element.collectionName }
-                        artistName={ element.artistName }
+                        imageAlbum={element.artworkUrl100}
+                        collectionName={element.collectionName}
+                        artistName={element.artistName}
                       />
                     </Link>
                   ))}
-              </section>)}
+              </section>
+            )}
           </div>
         )
     );

@@ -5,11 +5,13 @@ import MusicCard from '../components/MusicCard';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 export default class Favorites extends Component {
-  state = {
-    loading: false,
-    favoriteSongs: [],
-
-  };
+  constructor() {
+    super();
+    this.state = {
+      loading: false,
+      favoriteSongs: [],
+    };
+  }
 
   async componentDidMount() {
     this.setState({ loading: true });
@@ -34,15 +36,17 @@ export default class Favorites extends Component {
           <Header />
           {favoriteSongs.map((music) => (
             <MusicCard
-              parentCallback={ this.handleCallback }
-              favoriteSongs={ favoriteSongs }
-              track={ music }
-              trackId={ music.trackId }
-              key={ music.trackId }
-              trackName={ music.trackName }
-              previewUrl={ music.previewUrl }
-            />))}
-        </div>)
+              parentCallback={this.handleCallback}
+              favoriteSongs={favoriteSongs}
+              track={music}
+              trackId={music.trackId}
+              key={music.trackId}
+              trackName={music.trackName}
+              previewUrl={music.previewUrl}
+            />
+          ))}
+        </div>
+      )
     );
   }
 }

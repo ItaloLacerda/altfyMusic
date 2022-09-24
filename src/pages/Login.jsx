@@ -4,14 +4,17 @@ import { createUser } from '../services/userAPI';
 import Loading from '../components/Loading';
 
 export default class Login extends Component {
-  state = {
-    name: '',
-    image: '',
-    email: '',
-    description: '',
-    loading: false,
-    redirect: false,
-  };
+  constructor() {
+    super();
+    this.state = {
+      name: '',
+      image: '',
+      email: '',
+      description: '',
+      loading: false,
+      redirect: false,
+    };
+  }
 
   handelChange = ({ target }) => {
     const { name } = target;
@@ -33,7 +36,9 @@ export default class Login extends Component {
   render() {
     const minimumCharacters = 3;
     const { state } = this;
-    const { name, redirect, loading, image, email, description } = state;
+    const {
+      name, redirect, loading, image, email, description,
+    } = state;
     return (
       loading ? <Loading />
         : (
@@ -46,8 +51,8 @@ export default class Login extends Component {
                   name="image"
                   id="image"
                   type="text"
-                  onChange={ this.handelChange }
-                  value={ image }
+                  onChange={this.handelChange}
+                  value={image}
                 />
               </label>
               <label htmlFor="login">
@@ -57,8 +62,8 @@ export default class Login extends Component {
                   name="name"
                   id="login"
                   type="text"
-                  onChange={ this.handelChange }
-                  value={ name }
+                  onChange={this.handelChange}
+                  value={name}
                 />
               </label>
               <label htmlFor="email">
@@ -67,8 +72,8 @@ export default class Login extends Component {
                   name="email"
                   id="email"
                   type="email"
-                  onChange={ this.handelChange }
-                  value={ email }
+                  onChange={this.handelChange}
+                  value={email}
                 />
               </label>
               <label htmlFor="description">
@@ -77,14 +82,14 @@ export default class Login extends Component {
                   name="description"
                   id="description"
                   type="text"
-                  onChange={ this.handelChange }
-                  value={ description }
+                  onChange={this.handelChange}
+                  value={description}
                 />
               </label>
               <button
-                disabled={ (name.length < minimumCharacters) }
+                disabled={(name.length < minimumCharacters)}
                 type="button"
-                onClick={ this.handelClick }
+                onClick={this.handelClick}
                 data-testid="login-submit-button"
               >
                 Entrar

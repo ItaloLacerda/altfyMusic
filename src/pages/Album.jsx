@@ -7,12 +7,15 @@ import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from '../components/Loading';
 
 export default class Album extends Component {
-  state = {
-    loading: false,
-    musicAlbum: [],
-    artistName: '',
-    favoriteSongs: [],
-  };
+  constructor() {
+    super();
+    this.state = {
+      loading: false,
+      musicAlbum: [],
+      artistName: '',
+      favoriteSongs: [],
+    };
+  }
 
   async componentDidMount() {
     this.setState({ loading: true });

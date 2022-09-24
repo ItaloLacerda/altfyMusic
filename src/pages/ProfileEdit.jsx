@@ -5,15 +5,18 @@ import Loading from '../components/Loading';
 import { getUser, updateUser } from '../services/userAPI';
 
 export default class ProfileEdit extends Component {
-  state = {
-    inputName: '',
-    image: '',
-    email: '',
-    description: '',
-    disabled: true,
-    loading: true,
-    redirect: false,
-  };
+  constructor() {
+    super();
+    this.state = {
+      inputName: '',
+      image: '',
+      email: '',
+      description: '',
+      disabled: true,
+      loading: true,
+      redirect: false,
+    };
+  }
 
   async componentDidMount() {
     const userInformation = await getUser();
@@ -27,7 +30,9 @@ export default class ProfileEdit extends Component {
   }
 
   enableButton = () => {
-    const { inputName, image, email, description } = this.state;
+    const {
+      inputName, image, email, description,
+    } = this.state;
 
     const valueName = inputName !== '';
     const valueImage = image !== '';
@@ -51,7 +56,9 @@ export default class ProfileEdit extends Component {
   };
 
   handelClick = async () => {
-    const { inputName, image, email, description } = this.state;
+    const {
+      inputName, image, email, description,
+    } = this.state;
     const userInformation = {
       name: inputName,
       email,
@@ -64,8 +71,10 @@ export default class ProfileEdit extends Component {
   };
 
   render() {
-    const { inputName, image, email, description,
-      loading, disabled, redirect } = this.state;
+    const {
+      inputName, image, email, description,
+      loading, disabled, redirect,
+    } = this.state;
     return (
       <>
         {redirect && <Redirect to="/profile" />}
@@ -79,8 +88,8 @@ export default class ProfileEdit extends Component {
                   name="image"
                   id="image"
                   type="text"
-                  onChange={ this.handelChange }
-                  value={ image }
+                  onChange={this.handelChange}
+                  value={image}
                 />
               </label>
               <label htmlFor="login">
@@ -89,8 +98,8 @@ export default class ProfileEdit extends Component {
                   name="inputName"
                   id="login"
                   type="text"
-                  onChange={ this.handelChange }
-                  value={ inputName }
+                  onChange={this.handelChange}
+                  value={inputName}
                 />
               </label>
               <label htmlFor="email">
@@ -99,8 +108,8 @@ export default class ProfileEdit extends Component {
                   name="email"
                   id="email"
                   type="email"
-                  onChange={ this.handelChange }
-                  value={ email }
+                  onChange={this.handelChange}
+                  value={email}
                 />
               </label>
               <label htmlFor="description">
@@ -109,15 +118,15 @@ export default class ProfileEdit extends Component {
                   name="description"
                   id="description"
                   type="text"
-                  onChange={ this.handelChange }
-                  value={ description }
+                  onChange={this.handelChange}
+                  value={description}
                 />
               </label>
               <button
                 type="submit"
-                disabled={ disabled }
+                disabled={disabled}
                 data-testid="edit-button-save"
-                onClick={ this.handelClick }
+                onClick={this.handelClick}
               >
                 Editar perfil
               </button>
