@@ -22,7 +22,8 @@ export default class Album extends Component {
 
     this.setState({
       musicAlbum: MUSICALBUM.filter((_track, index) => index > 0),
-      artistName: MUSICALBUM[0] });
+      artistName: MUSICALBUM[0],
+    });
 
     const FAVORITESONGS = await getFavoriteSongs();
 
@@ -30,7 +31,9 @@ export default class Album extends Component {
   }
 
   render() {
-    const { musicAlbum, artistName, loading, favoriteSongs } = this.state;
+    const {
+      musicAlbum, artistName, loading, favoriteSongs,
+    } = this.state;
     return (
       loading ? <Loading /> : (
         <div data-testid="page-album">
@@ -39,14 +42,16 @@ export default class Album extends Component {
           <h3 data-testid="artist-name">{artistName.artistName}</h3>
           {musicAlbum.map((track) => (
             <MusicCard
-              favoriteSongs={ favoriteSongs }
-              track={ track }
-              trackId={ track.trackId }
-              key={ track.trackId }
-              trackName={ track.trackName }
-              previewUrl={ track.previewUrl }
-            />))}
-        </div>)
+              favoriteSongs={favoriteSongs}
+              track={track}
+              trackId={track.trackId}
+              key={track.trackId}
+              trackName={track.trackName}
+              previewUrl={track.previewUrl}
+            />
+          ))}
+        </div>
+      )
     );
   }
 }
