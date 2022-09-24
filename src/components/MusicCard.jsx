@@ -4,10 +4,13 @@ import { addSong, removeSong } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 export default class MusicCard extends Component {
-  state = {
-    loading: false,
-    checked: false,
-  };
+  constructor() {
+    super();
+    this.state = {
+      loading: false,
+      checked: false,
+    };
+  }
 
   componentDidMount() {
     const { favoriteSongs, trackId } = this.props;
@@ -32,24 +35,27 @@ export default class MusicCard extends Component {
 
   render() {
     const { loading, checked } = this.state;
-    const { trackName, previewUrl, trackId, track, parentCallback } = this.props;
+    const {
+      trackName, previewUrl, trackId, track, parentCallback,
+    } = this.props;
     return (
       loading ? <Loading /> : (
         <div>
           <h4>{trackName}</h4>
-          <audio data-testid="audio-component" src={ previewUrl } controls>
+          <audio data-testid="audio-component" src={previewUrl} controls>
             <track kind="captions" />
           </audio>
-          <label htmlFor={ trackId } data-testid={ `checkbox-music-${trackId}` }>
+          <label htmlFor={trackId} data-testid={`checkbox-music-${trackId}`}>
             <span>Favorita</span>
             <input
               type="checkbox"
-              id={ trackId }
-              onChange={ () => this.handelChange(track, parentCallback) }
-              checked={ checked }
+              id={trackId}
+              onChange={() => this.handelChange(track, parentCallback)}
+              checked={checked}
             />
           </label>
-        </div>)
+        </div>
+      )
     );
   }
 }

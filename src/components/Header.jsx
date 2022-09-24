@@ -4,10 +4,13 @@ import Loading from './Loading';
 import { getUser } from '../services/userAPI';
 
 export default class Header extends Component {
-  state = {
-    loading: true,
-    userName: '',
-  };
+  constructor() {
+    super();
+    this.state = {
+      loading: true,
+      userName: '',
+    };
+  }
 
   async componentDidMount() {
     const userInformation = await getUser();
